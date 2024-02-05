@@ -39,7 +39,7 @@ class DBStorage:
                         'State': State, 'City': City, 'Amenity': Amenity,
                         'Review': Review}
         if cls is not None:
-            query = self.__session.query(my_list_dict[cls])
+            query = self.__session.query(cls)
             result = query.all()
             for obj in result:
                 key = f"{obj.to_dict()['__class__']}.{obj.id}"
@@ -77,5 +77,10 @@ class DBStorage:
         from models.review import Review
         Base.metadata.create_all(self.__engine)
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        ScopedSession = scoped_session(Session)
-        self.__session = ScopedSession()
+        #  ScopedSession = scoped_session(Session)
+        self.__session = scoped_session(Session)
+
+    def close(self):
+        """calls the remove method of the object
+        """
+        self.__session.remove()

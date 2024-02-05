@@ -65,3 +65,8 @@ class FileStorage:
         if obj is not None:
             tmp = f"{obj.to_dict()['__class__']}.{obj.id}"
             del FileStorage.__objects[tmp]
+
+    def close(self):
+        """method deseriarises JSON file to objects
+        """
+        self.reload()
