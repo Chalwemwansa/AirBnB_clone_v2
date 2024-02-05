@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # script prepares an ubuntu server for deployment of a static website
 
-# installs nginx
+# install nginx
 apt-get -y update && apt-get -y install nginx
 
-# list of directories to make if they do not exist
+# list of directories to make if they do  not exist
 dir_list=('/data/' '/data/web_static/' '/data/web_static/releases/'
 	  '/data/web_static/shared/' '/data/web_static/releases/test/')
 
@@ -17,7 +17,7 @@ for dir in "${dir_list[@]}"; do
 	fi
 done
 
-# create a fake html file and add some content to it
+# create a fake html file and add some content
 html_file='/data/web_static/releases/test/index.html'
 
 if [ -f "$html_file" ]; then
